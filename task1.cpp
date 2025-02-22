@@ -46,6 +46,5 @@ for(size_t i = 1; i < measurements.size() - 1; ++i){
   return result;
   }
 
-  #include <iostream>
 
   
