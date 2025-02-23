@@ -31,15 +31,18 @@ for(size_t i = 1; i < measurements.size() - 1; ++i){
   double f_x = measurements[i].distance;
   double f_xmh = measurements[i + 1].distance;
 
-  uint64_t t_xh = measurements[i - 1].time;
-  uint64_t t_x = measurements[i].time;
-  uint64_t t_xmh = measurements[i + 1].time;
+  
+  double t_xh = static_cast<double>(measurements[i - 1].time) * 1e-9; // Convert to seconds
+  double t_x = static_cast<double>(measurements[i].time) * 1e-9;
+  double t_xmh = static_cast<double>(measurements[i + 1].time) * 1e-9;
 
-    
+  double h1 = t_x - t_xh;
+  double h2 = t_xmh - t_x;
 
-    double h_squared = std::pow(static_cast<double>(t_xmh - t_xh) / 2.0, 2);
-    double SecondDeriv = (f_xh - 2 * f_x + f_xmh) / h_squared;
-    result.push_back(SecondDeriv);
+
+  double h_squared = std::pow(static_cast<double>(t_xmh - t_xh) / 2.0, 2);
+  double SecondDeriv = (f_xh - 2 * f_x + f_xmh) / h_squared;
+  result.push_back(SecondDeriv);
 
 }
 
